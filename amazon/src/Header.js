@@ -15,7 +15,7 @@ function Header() {
         auth.signOut()
     }
     return (
-        <div className="header">
+        <header className="header">
             <Link to='/'>
             <img
             className="header_logo"
@@ -30,7 +30,7 @@ function Header() {
                 <SearchIcon className="header_searchIcon"/>
                     
             </div>
-            <div className="header_nav">
+            <nav className="header_nav">
                 <Link to={!user && "/login"}>
                 <div onClick={handleAuth} className= "header_option">
                     <span className="header_optionLineone">
@@ -68,8 +68,11 @@ function Header() {
                     </span>
                 </div>
                 </Link>
-            </div>
-        </div>
+            </nav>
+            <nav className="header__hamburger">
+                
+            </nav>
+        </header>
     )
 }
 

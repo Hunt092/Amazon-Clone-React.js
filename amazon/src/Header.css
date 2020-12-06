@@ -1,6 +1,7 @@
 .header{
     height: 60px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: #131921;
     position: sticky;
@@ -15,7 +16,8 @@
 }
 .header_search{
     display: flex;
-    flex:1;
+    width: 50%;
+    /* flex:1; */
     align-items: center;
     border-radius: 24px;
 }
@@ -30,7 +32,10 @@
     padding: 5px;
     height: 22px;
     background-color: chocolate;
-
+    transition: all 100ms ease;
+}
+.header_searchIcon:hover{
+    transform: scale(1.05);
 }
 .header_nav{
     display: flex;
@@ -43,6 +48,10 @@
     margin-left: 10px;
     margin-right: 10px;
     color: white;
+    transition: all 200ms ease;
+}
+.header_option:hover ,.header_optionBasket:hover{
+    transform: scale(1.05);
 }
 .header_optionLineone{
     font-size: 10px;
@@ -55,6 +64,8 @@
     color: white;
     display: flex;
     align-items: center;
+    transition: all 200ms ease;
+
 }
 .header_BasketCount{
     margin-left: 10px;
