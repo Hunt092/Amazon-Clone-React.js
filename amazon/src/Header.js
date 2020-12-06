@@ -69,9 +69,6 @@ function Header() {
                 </div>
                 </Link>
             </nav>
-            <nav className="header__hamburger">
-                
-            </nav>
         </header>
     )
 }

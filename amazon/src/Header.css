@@ -1,7 +1,7 @@
 .header{
     height: 60px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: #131921;
     position: sticky;
@@ -13,6 +13,11 @@
     object-fit: contain;
     margin: 0 20px;
     margin-top: 18px;
+    transition: all 100ms ease;
+}
+
+.header_logo:hover{
+    transform: scale(1.05);
 }
 .header_search{
     display: flex;
@@ -28,10 +33,14 @@
     border: none;
     width: 100%;
 }
+.header_searchInput:focus{
+    border: none;
+    outline: none;
+}
 .header_searchIcon{
-    padding: 5px;
-    height: 22px;
-    background-color: chocolate;
+    padding: 4px;
+    height: 20px;
+    background-color: rgb(255, 174, 23);
     transition: all 100ms ease;
 }
 .header_searchIcon:hover{

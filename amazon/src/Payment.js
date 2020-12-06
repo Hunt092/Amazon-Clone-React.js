@@ -1,24 +1,41 @@
 import { CardElement,useElements, useStripe } from '@stripe/react-stripe-js';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
 import Checkoutproduct from './Checkoutproduct';
 import "./Payment.css"
 import { getBasketTotal } from './Reducer';
 import { useStateValue } from './StateProvider';
 import CurrencyFormat from "react-currency-format";
+import axios from './axios'
 
 function Payment() {
     
     const [{basket, user}, dispatch] = useStateValue();
     const [error, setError] = useState(null);
-    const [disable, setDisable] = useState(true);
     const stripe = useStripe();
     const elements = useElements();
-    const handleSumbit = e =>{
+    const [succeeded, setSucceeded] = useState(false);
+    const [processing, setProcessing] = useState("");
+    const [disabled, setDisabled] = useState(true);
+    const [Clientsecret, setClientsecret] = useState("")
+    useEffect(() => {
+        const getClientSecret = async ()=>{
+            const response = await axios({
+                method: 'post',
+                url: `/payment/create?total=${getBasketTotal(basket)}`
+            })
+            setClientsecret(response.data.clientSecret)
+        }
+        getClientSecret()
+        
+    }, [basket])
+    const handleSumbit = async (e) =>{
+        e.preventDefault();
+        setProcessing(true);
 
     }
     const handleChange =  e =>{
-        setDisable(e.empty);
+        setDisabled(e.empty);
         setError(e.error ? e.error.message : "")
     }
     return (
@@ -55,6 +72,7 @@ function Payment() {
                     <div className="payment__method">
                         <form onSubmit={handleSumbit}>
                             <CardElement onChange={handleChange}/>
+                            {error && <div className="payment__error">{error}</div>}
                             <div className="payment__pricecontainer">
                                 <CurrencyFormat
                                 renderText ={(value)=>(
@@ -68,8 +86,13 @@ function Payment() {
                                 thousandSeparator={true}
                                 prefix={'₹ '}
                                 />
+                                
+
+                                <button disabled={processing || disabled || succeeded}>
+                                <span>{processing ? <p>Processing</p>: "Proceed with Payment"}</span></button>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>

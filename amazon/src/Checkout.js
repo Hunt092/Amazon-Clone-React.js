@@ -10,9 +10,9 @@ function Checkout() {
     return (
         <div className='checkout'>
             <div className='checkout_left'>
-                <div>
+                <div className="checkout_title">
                     <h3>Hello, {user?.email}</h3>
-                    <h2 className="checkout_title">
+                    <h2 >
                         Your Shopping Basket
                     </h2>
                 </div>
